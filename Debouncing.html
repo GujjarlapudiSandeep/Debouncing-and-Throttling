@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" value="" oninput="onsearchinput()" />
+  </body>
+</html>
+<script>
+  function debounce(fun, delay) {
+    let timeoutid;
+    return function (arg) {
+      clearTimeout(timeoutid);
+      timeoutid = setTimeout(() => {
+        fetchData(arg);
+      }, delay);
+    };
+  }
+  function fetchData(query) {
+    console.log(`processing search query ${query}`);
+  }
+  const debouncedsearchquery = debounce(fetchData, 2000);
+
+  function onsearchinput() {
+    const query = event.target.value;
+    debouncedsearchquery(query);
+  }
+</script>
